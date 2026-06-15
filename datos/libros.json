@@ -1,7 +1,7 @@
 [
   {
     "id": "reina_mab",
-    "fecha":"2026-06-08",
+    "fecha": "2026-06-08",
     "tipo": "libro",
     "titulo": "El Velo de la Reina Mab",
     "autor": "Rubén Darío",
@@ -15,7 +15,7 @@
   },
   {
     "id": "pedro_paramo",
-    "fecha":"2026-06-08",
+    "fecha": "2026-06-08",
     "tipo": "libro",
     "titulo": "Pedro Páramo",
     "autor": "Juan Rulfo",
@@ -97,5 +97,13 @@
     "descripcion": "Articulo de prueba de EduLibre",
     "pdf": "libros/prueba.pdf",
     "recomendado": false
+  },
+  {
+    "id": "libro-prueba",
+    "titulo": "Libro prueba",
+    "autor": "Tea",
+    "descripcion": "Prueba ",
+    "imagen": "None",
+    "archivo": "https://www.pdffiller.com/jsfiller-desk10/?flat_pdf_quality=high&requestHash=024a534bf446c38a2cde35848bd3f3e4072f5edb301746a4c4bb98cd6d6161a3&lang=es&projectId=2079069480&isSkipEditorLoadFrequency=true&jsf-fake-edit-embedded=true&jsf-socket-io=true&jsf-disable-autosave=true&jsf-fake-edit-stream-editing=true&richTextFormatting=true&acc-header-redesign-2=false&routeId=2c083e16c9311c909841e3aa8a32a1fb#9198ca167b514dc385945d6bbd8186b8"
   }
 ]
