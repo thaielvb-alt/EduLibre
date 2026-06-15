@@ -36,7 +36,7 @@
     "categoria": "Literatura",
     "descripcion": "Una de las novelas sobre invencion :).",
     "imagen": "imagenes/InvencionMorel.jpg",
-    "pdf": "InvencionMorel.pdf",
+    "pdf": "libros/InvencionMorel.pdf",
     "recomendado": true
   },
   {
@@ -48,7 +48,7 @@
     "categoria": "Literatura",
     "descripcion": "La manera mas sencilla de iniciarse en la lengua alemana.",
     "imagen": "imagenes/AlemanCadaDia.jpg",
-    "pdf": "AlemanCadaDia.pdf",
+    "pdf": "libros/AlemanCadaDia.pdf",
     "recomendado": false
   },
   {
@@ -60,7 +60,7 @@
     "categoria": "Literatura",
     "descripcion": "Curso de gramática básica para estudiantes de alemán.",
     "imagen": "imagenes/CursoGramaticaAleman.jpg",
-    "pdf": "CursoGramaticaAleman.pdf",
+    "pdf": "libros/CursoGramaticaAleman.pdf",
     "recomendado": false
   },
   {
@@ -72,7 +72,7 @@
     "categoria": "Arte",
     "descripcion": "The human anatomy for artists by Eliot Goldfinger of Oxford University Press - 1991.",
     "imagen": "imagenes/HumanAnatomyForArtists.jpg",
-    "pdf": "HumanAnatomyForArtists.pdf",
+    "pdf": "libros/HumanAnatomyForArtists.pdf",
     "recomendado": false
   },
   {
@@ -84,7 +84,17 @@
     "categoria": "Poetica",
     "descripcion": "La Poetica - Aristoteles",
     "imagen": "imagenes/AristotelesPoetica.jpg",
-    "pdf": "AristotelesPoetica.pdf",
+    "pdf": "libros/AristotelesPoetica.pdf",
+    "recomendado": false
+  },
+  {
+    "id": "prueba",
+    "fecha": "2026-06-07",
+    "tipo": "libro",
+    "titulo": "Libro de Prueba",
+    "autor": "EduLibre",
+    "descripcion": "Articulo de prueba de EduLibre",
+    "pdf": "libros/prueba.pdf",
     "recomendado": false
   }
 ]
