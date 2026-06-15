@@ -93,6 +93,7 @@
     "tipo": "libro",
     "titulo": "Libro de Prueba",
     "autor": "EduLibre",
+    "categoria": "",
     "descripcion": "Articulo de prueba de EduLibre",
     "pdf": "libros/prueba.pdf",
     "recomendado": false
