@@ -11,6 +11,8 @@ on:
         required: true
       descripcion:
         required: true
+      imagen:
+        required: true
       archivo:
         required: true
 
@@ -35,9 +37,10 @@ jobs:
           TITULO: ${{ inputs.titulo }}
           AUTOR: ${{ inputs.autor }}
           DESCRIPCION: ${{ inputs.descripcion }}
+          IMAGEN: ${{ inputs.imagen }}
           ARCHIVO: ${{ inputs.archivo }}
 
-      - name: Commit cambios
+      - name: Commit
         run: |
           git config user.name "github-actions"
           git config user.email "actions@github.com"

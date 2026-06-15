@@ -1,35 +1,59 @@
-<h1>Subir contenido</h1>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Subir contenido</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<h1>Subir a EduLibre</h1>
+
+<select id="tipo">
+  <option value="libros">Libro</option>
+  <option value="videos">Video</option>
+  <option value="audios">Audio</option>
+  <option value="guias">Guía</option>
+</select>
 
 <input id="titulo" placeholder="Título">
 <input id="autor" placeholder="Autor">
-<input id="desc" placeholder="Descripción">
-<input id="cat" placeholder="Categoría">
+
+<textarea id="descripcion" placeholder="Descripción"></textarea>
+
+<input id="imagen" placeholder="URL imagen">
+<input id="archivo" placeholder="URL archivo (pdf/mp4/mp3)">
 
 <button onclick="subir()">Subir</button>
 
 <script>
 async function subir(){
 
-    const data = {
-        titulo: document.getElementById("titulo").value,
-        autor: document.getElementById("autor").value,
-        descripcion: document.getElementById("desc").value,
-        categoria: document.getElementById("cat").value
-    };
+  const inputs = {
+    tipo: document.getElementById("tipo").value,
+    titulo: document.getElementById("titulo").value,
+    autor: document.getElementById("autor").value,
+    descripcion: document.getElementById("descripcion").value,
+    imagen: document.getElementById("imagen").value,
+    archivo: document.getElementById("archivo").value
+  };
 
-    await fetch("https://api.github.com/repos/TU_USUARIO/EduLibre/actions/workflows/upload.yml/dispatches", {
-        method: "POST",
-        headers: {
-            "Accept": "application/vnd.github+json",
-            "Authorization": "Bearer TU_GITHUB_TOKEN",
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-            ref: "main",
-            inputs: data
-        })
-    });
+  await fetch("https://api.github.com/repos/TU_USUARIO/EduLibre/actions/workflows/upload.yml/dispatches", {
+    method: "POST",
+    headers: {
+      "Accept": "application/vnd.github+json",
+      "Authorization": "Bearer TU_TOKEN",
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      ref: "main",
+      inputs
+    })
+  });
 
-    alert("Subido (procesando en GitHub)");
+  alert("Subido correctamente (GitHub Actions)");
 }
 </script>
+
+</body>
+</html>
