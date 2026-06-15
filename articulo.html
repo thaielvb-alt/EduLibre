@@ -124,11 +124,11 @@ src="${libro.video}">
 function leerLibro(){
 
 const ruta =
-"/libros/" +
-libro.pdf.split("/").pop();
+"../../" + libro.pdf;
 
 location.href =
-"pdfjs/web/viewer.html?file=" +
+"pdfjs/web/viewer.html?file=" 
++
 encodeURIComponent(ruta);
 
 }
