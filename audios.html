@@ -1,92 +1,136 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Videos</title>
-<link rel="stylesheet" href="style.css">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Audios</title>
+
+<link rel="stylesheet"
+href="style.css">
+
 </head>
+
+
 <body>
 
+
 <nav>
+
 <h1>🎧 Audios</h1>
+
 </nav>
+
+
 
 <main id="contenido"></main>
 
+
+
+
 <script>
+
 
 async function cargar(){
 
+
 const audios =
+
 await fetch(
 "datos/audios.json"
 )
+
 .then(r=>r.json());
 
+
+
 const contenido =
+
 document.getElementById(
 "contenido"
 );
 
-videos.forEach(item=>{
+
+
+audios.forEach(item=>{
+
 
 contenido.innerHTML += `
 
+
 <div class="card">
 
-<img src="${item.imagen}">
+
+<img
+
+src="${item.imagen}"
+
+onerror="
+this.src='imagenes/default.png'
+"
+
+>
+
 
 <div class="card-content">
 
-<h3>${item.titulo}</h3>
 
-<p>${item.descripcion}</p>
+<h3>
+${item.titulo}
+</h3>
 
-<button
-class="btn"
-onclick="abrir('${item.id}')">
 
-Ver
+<p>
+${item.descripcion}
+</p>
 
-</button>
+
+
+<audio controls>
+
+
+<source
+
+src="${item.archivo}"
+
+type="audio/mpeg"
+
+>
+
+
+</audio>
+
+
 
 </div>
 
+
 </div>
+
+
 
 `;
 
+
+
 });
 
-}
-
-async function abrir(id){
-
-const audios =
-await fetch(
-"datos/audios.json"
-)
-.then(r=>r.json());
-
-const audio =
-audios.find(
-x=>x.id===id
-);
-
-localStorage.setItem(
-"libroActual",
-JSON.stringify(audio)
-);
-
-location.href =
-"articulo.html";
 
 }
+
+
 
 cargar();
 
+
+
 </script>
 
+
 </body>
+
 </html>

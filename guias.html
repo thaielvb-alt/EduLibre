@@ -1,92 +1,180 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Videos</title>
-<link rel="stylesheet" href="style.css">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Guías</title>
+
+<link rel="stylesheet"
+href="style.css">
+
 </head>
+
+
 <body>
 
+
 <nav>
-<h1>🎓 guias</h1>
+
+<h1>🎓 Guías de estudio</h1>
+
 </nav>
+
+
 
 <main id="contenido"></main>
 
+
+
+
 <script>
+
 
 async function cargar(){
 
+
 const guias =
+
 await fetch(
 "datos/guias.json"
 )
+
 .then(r=>r.json());
 
+
+
 const contenido =
+
 document.getElementById(
 "contenido"
 );
 
-videos.forEach(item=>{
+
+
+guias.forEach(item=>{
+
 
 contenido.innerHTML += `
 
+
 <div class="card">
 
-<img src="${item.imagen}">
+
+<img
+
+src="${item.imagen}"
+
+onerror="
+this.src='imagenes/default.png'
+"
+
+>
+
 
 <div class="card-content">
 
-<h3>${item.titulo}</h3>
 
-<p>${item.descripcion}</p>
+<h3>
+${item.titulo}
+</h3>
+
+
+
+<p>
+${item.descripcion}
+</p>
+
+
 
 <button
-class="btn"
-onclick="abrir('${item.id}')">
 
-Ver
+class="btn"
+
+onclick="abrir('${item.id}')"
+
+>
+
+Ver guía
 
 </button>
 
-</div>
+
 
 </div>
+
+
+</div>
+
+
 
 `;
 
+
+
 });
+
+
 
 }
 
+
+
 async function abrir(id){
 
+
 const guias =
+
 await fetch(
 "datos/guias.json"
 )
+
 .then(r=>r.json());
 
+
+
 const guia =
+
 guias.find(
-x=>x.id===id
+x=>x.id==id
 );
 
+
+
 localStorage.setItem(
+
 "libroActual",
-JSON.stringify(guia)
+
+JSON.stringify(
+guia
+)
+
 );
+
+
 
 location.href =
 "articulo.html";
 
+
+
 }
+
+
+
 
 cargar();
 
+
+
 </script>
 
+
+
 </body>
+
 </html>
