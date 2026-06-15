@@ -1,92 +1,298 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
 <title>Videos</title>
-<link rel="stylesheet" href="style.css">
+
+<link rel="stylesheet"
+href="style.css">
+
 </head>
+
+
 <body>
 
+
 <nav>
+
 <h1>🎥 Videos</h1>
+
 </nav>
+
+
 
 <main id="contenido"></main>
 
+
+
+
 <script>
+
 
 async function cargar(){
 
-const videos =
+
+const respuesta =
 await fetch(
 "datos/videos.json"
-)
-.then(r=>r.json());
+);
+
+
+const videos =
+await respuesta.json();
+
+
 
 const contenido =
 document.getElementById(
 "contenido"
 );
 
+
+
 videos.forEach(item=>{
+
 
 contenido.innerHTML += `
 
+
 <div class="card">
 
-<img src="${item.imagen}">
+
+
+<video
+
+class="video-card"
+
+controls
+
+preload="metadata"
+
+
+>
+
+<source
+
+src="${item.archivo}"
+
+type="video/mp4"
+
+>
+
+
+Tu navegador no soporta videos.
+
+
+</video>
+
+
+
 
 <div class="card-content">
 
-<h3>${item.titulo}</h3>
 
-<p>${item.descripcion}</p>
+
+<h3>
+${item.titulo}
+</h3>
+
+
+
+
+<p>
+${item.descripcion}
+</p>
+
+
+
 
 <button
-class="btn"
-onclick="abrir('${item.id}')">
 
-Ver
+class="btn"
+
+onclick="abrir('${item.id}')"
+
+>
+
+Ver más
 
 </button>
 
-</div>
+
 
 </div>
+
+
+</div>
+
+
 
 `;
 
+
+
 });
+
 
 }
 
-async function abrir(id){
 
-const videos =
+
+
+
+function abrir(id){
+
+
+const video =
+
+videosGlobal.find(
+x=>x.id==id
+);
+
+
+localStorage.setItem(
+
+"libroActual",
+
+JSON.stringify(video)
+
+);
+
+
+
+location.href=
+"articulo.html";
+
+
+}
+
+
+
+
+let videosGlobal=[];
+
+
+
+async function iniciar(){
+
+
+videosGlobal =
+
 await fetch(
 "datos/videos.json"
 )
 .then(r=>r.json());
 
-const video =
-videos.find(
-x==>x.id==id
-);
 
-localStorage.setItem(
-"libroActual",
-JSON.stringify(video)
-);
+cargarDesdeLista();
 
-location.href =
-"articulo.html";
+
 
 }
 
-cargar();
+
+
+function cargarDesdeLista(){
+
+
+const contenido =
+document.getElementById(
+"contenido"
+);
+
+
+
+contenido.innerHTML="";
+
+
+
+videosGlobal.forEach(item=>{
+
+
+contenido.innerHTML += `
+
+
+<div class="card">
+
+
+<video
+
+controls
+
+class="video-card"
+
+preload="metadata"
+
+>
+
+<source
+
+src="${item.archivo}"
+
+type="video/mp4"
+
+>
+
+</video>
+
+
+
+<div class="card-content">
+
+
+<h3>
+${item.titulo}
+</h3>
+
+
+<p>
+${item.descripcion}
+</p>
+
+
+<button
+
+class="btn"
+
+onclick="abrir('${item.id}')"
+
+>
+
+Ver más
+
+</button>
+
+
+</div>
+
+
+</div>
+
+
+`;
+
+
+
+});
+
+
+}
+
+
+
+iniciar();
+
+
 
 </script>
 
+
 </body>
+
 </html>

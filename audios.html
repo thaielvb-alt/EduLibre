@@ -35,10 +35,14 @@ href="style.css">
 <script>
 
 
-async function cargar(){
+let audiosGlobal=[];
 
 
-const audios =
+
+async function iniciar(){
+
+
+audiosGlobal =
 
 await fetch(
 "datos/audios.json"
@@ -49,20 +53,20 @@ await fetch(
 
 
 const contenido =
-
 document.getElementById(
 "contenido"
 );
 
 
 
-audios.forEach(item=>{
+audiosGlobal.forEach(item=>{
 
 
 contenido.innerHTML += `
 
 
 <div class="card">
+
 
 
 <img
@@ -76,6 +80,7 @@ this.src='imagenes/default.png'
 >
 
 
+
 <div class="card-content">
 
 
@@ -84,9 +89,11 @@ ${item.titulo}
 </h3>
 
 
+
 <p>
 ${item.descripcion}
 </p>
+
 
 
 
@@ -102,7 +109,25 @@ type="audio/mpeg"
 >
 
 
+Tu navegador no soporta audio.
+
+
 </audio>
+
+
+
+
+<button
+
+class="btn"
+
+onclick="abrir('${item.id}')"
+
+>
+
+Ver más
+
+</button>
 
 
 
@@ -124,11 +149,42 @@ type="audio/mpeg"
 
 
 
-cargar();
+
+
+function abrir(id){
+
+
+const audio =
+
+audiosGlobal.find(
+x=>x.id==id
+);
+
+
+
+localStorage.setItem(
+
+"libroActual",
+
+JSON.stringify(audio)
+
+);
+
+
+
+location.href=
+"articulo.html";
+
+}
+
+
+
+iniciar();
 
 
 
 </script>
+
 
 
 </body>
