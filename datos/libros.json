@@ -119,5 +119,19 @@
     "audio": "",
     "video": "",
     "recomendado": false
+  },
+  {
+    "id": "prueba1",
+    "fecha": "2026-06-15",
+    "tipo": "libros",
+    "titulo": "Libro prueba2",
+    "autor": "Tea",
+    "categoria": "Prueba",
+    "descripcion": "Prueba ",
+    "imagen": "imagenes/prueba1.jpg",
+    "pdf": "libros/prueba1.pdf",
+    "video": "",
+    "audio": "",
+    "recomendado": false
   }
 ]
