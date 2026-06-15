@@ -17,12 +17,16 @@ href="style.css">
 
 <body>
 
+
 <div
 id="articulo"
 class="articulo">
 </div>
 
+
+
 <script>
+
 
 const libro =
 JSON.parse(
@@ -31,111 +35,251 @@ localStorage.getItem(
 )
 );
 
+
+
 if(!libro){
 
-location.href =
+window.location.href =
 "index.html";
 
 }
 
-document
-.getElementById("articulo")
-.innerHTML = `
+
+
+const articulo =
+document.getElementById(
+"articulo"
+);
+
+
+
+articulo.innerHTML = `
+
 
 <img
+
 src="${libro.imagen}"
+
 onerror="
 this.src='imagenes/default.png'
-">
+"
 
-<h1>${libro.titulo}</h1>
+>
 
-<h3>✍ ${libro.autor}</h3>
+
+
+<h1>
+${libro.titulo}
+</h1>
+
+
+
+<h3>
+✍ ${libro.autor}
+</h3>
+
+
 
 <p>
 📚 ${libro.categoria}
 </p>
 
+
+
 <br>
+
+
 
 <p>
 ${libro.descripcion}
 </p>
 
+
+
 <div class="botones">
 
+
+
 <button
+
 class="btn"
-onclick="leerLibro()">
+
+onclick="leerLibro()"
+
+>
 
 📖 Leer
 
 </button>
 
+
+
+
+
 <a
+
 class="btn"
-href="/EduLibre/${libro.pdf}"
-download>
+
+href="${libro.pdf}"
+
+download
+
+>
 
 ⬇ Descargar
 
 </a>
 
+
+
+
+
 <a
+
 class="btn"
-href="index.html">
+
+href="index.html"
+
+>
 
 ⬅ Volver
 
 </a>
 
+
+
 </div>
+
+
+
 
 ${libro.audio ? `
 
-<h2>🎧 Audio</h2>
+
+<h2>
+🎧 Audio
+</h2>
+
 
 <audio controls>
 
+
 <source
-src="${libro.audio}">
+
+src="${libro.audio}"
+
+type="audio/mpeg"
+
+
+>
+
 
 </audio>
 
+
 ` : ""}
+
+
+
+
 
 ${libro.video ? `
 
-<h2>🎥 Video</h2>
+
+<h2>
+🎥 Video
+</h2>
+
 
 <video
+
 controls
-width="100%">
+
+width="100%"
+
+>
+
 
 <source
-src="${libro.video}">
+
+src="${libro.video}"
+
+type="video/mp4"
+
+
+>
+
 
 </video>
 
+
 ` : ""}
+
+
 
 `;
 
+
+
+
+
+
 function leerLibro(){
 
-const ruta =
-window.location.origin +
-"/EduLibre/" +
-libro.pdf;
 
+if(!libro.pdf){
 
-window.location.href =
-"pdfjs/web/viewer.html?file=" +
-encodeURIComponent(ruta);
+alert(
+"Este recurso no tiene PDF"
+);
+
+return;
 
 }
 
+
+
+const rutaPDF =
+
+window.location.origin
+
++
+
+window.location.pathname
+.replace(
+"articulo.html",
+""
+)
+
++
+
+libro.pdf;
+
+
+
+const visor =
+
+"pdfjs/web/viewer.html?file="
+
++
+
+encodeURIComponent(
+rutaPDF
+);
+
+
+
+window.location.href =
+visor;
+
+
+
+}
+
+
+
 </script>
+
 
 </body>
 
