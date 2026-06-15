@@ -74,7 +74,7 @@ onclick="leerLibro()">
 
 <a
 class="btn"
-href="${libro.pdf}"
+href="/EduLibre/${libro.pdf}"
 download>
 
 ⬇ Descargar
@@ -124,11 +124,11 @@ src="${libro.video}">
 function leerLibro(){
 
 const ruta =
-"../../" + libro.pdf;
+"/EduLibre/" + libro.pdf;
+
 
 location.href =
-"pdfjs/web/viewer.html?file=" 
-+
+"pdfjs/web/viewer.html?file=" +
 encodeURIComponent(ruta);
 
 }
