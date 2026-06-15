@@ -1,5 +1,9 @@
-<h1>Subir contenido EduLibre</h1>
+<h1>Subir artículo</h1>
 
+<label>Título</label>
+<input id="titulo">
+
+<label>Tipo</label>
 <select id="tipo">
   <option value="libros">Libro</option>
   <option value="videos">Video</option>
@@ -7,31 +11,68 @@
   <option value="guias">Guía</option>
 </select>
 
-<input id="titulo" placeholder="Título">
-<input id="autor" placeholder="Autor">
-<input id="categoria" placeholder="Categoría">
-<textarea id="descripcion" placeholder="Descripción"></textarea>
+<label>Autor</label>
+<input id="autor">
 
-<input id="imagen" placeholder="URL imagen">
-<input id="pdf" placeholder="URL PDF (si aplica)">
-<input id="audio" placeholder="URL audio (si aplica)">
-<input id="video" placeholder="URL video (si aplica)">
+<label>Categoría</label>
+<input id="categoria">
+
+<label>Descripción</label>
+<textarea id="descripcion"></textarea>
+
+<label>Archivo principal</label>
+<input type="file" id="archivo">
+
+<label>Video (opcional)</label>
+<input type="file" id="video">
+
+<label>Audio (opcional)</label>
+<input type="file" id="audio">
+
+<label>Imagen</label>
+<input type="file" id="imagen">
 
 <button onclick="subir()">Subir</button>
 
 <script>
+function toBase64(file){
+  return new Promise((res, rej)=>{
+    const r = new FileReader();
+    r.onload = () => res(r.result);
+    r.onerror = rej;
+    r.readAsDataURL(file);
+  });
+}
+
 async function subir(){
 
-  const data = {
-    tipo: document.getElementById("tipo").value,
-    titulo: document.getElementById("titulo").value,
-    autor: document.getElementById("autor").value,
-    categoria: document.getElementById("categoria").value,
-    descripcion: document.getElementById("descripcion").value,
-    imagen: document.getElementById("imagen").value,
-    pdf: document.getElementById("pdf").value,
-    audio: document.getElementById("audio").value,
-    video: document.getElementById("video").value
+  const titulo = document.getElementById("titulo").value;
+  const tipo = document.getElementById("tipo").value;
+  const autor = document.getElementById("autor").value;
+  const categoria = document.getElementById("categoria").value;
+  const descripcion = document.getElementById("descripcion").value;
+
+  const id = titulo
+  .toLowerCase()
+  .replace(/\s+/g, "_")
+  .replace(/[^a-z0-9_]/g, "");
+
+  const archivo = document.getElementById("archivo").files[0];
+  const video = document.getElementById("video").files[0];
+  const audio = document.getElementById("audio").files[0];
+  const imagen = document.getElementById("imagen").files[0];
+
+  const payload = {
+    tipo,
+    id,
+    titulo,
+    autor,
+    categoria,
+    descripcion,
+    archivo: archivo ? await toBase64(archivo) : "",
+    video: video ? await toBase64(video) : "",
+    audio: audio ? await toBase64(audio) : "",
+    imagen: imagen ? await toBase64(imagen) : ""
   };
 
   await fetch("https://api.github.com/repos/TU_USUARIO/EduLibre/actions/workflows/upload.yml/dispatches", {
@@ -43,10 +84,10 @@ async function subir(){
     },
     body: JSON.stringify({
       ref: "main",
-      inputs: data
+      inputs: payload
     })
   });
 
-  alert("Subido correctamente");
+  alert("Subida enviada");
 }
 </script>

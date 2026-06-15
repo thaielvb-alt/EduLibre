@@ -5,6 +5,8 @@ on:
     inputs:
       tipo:
         required: true
+      id:
+        required: true
       titulo:
         required: true
       autor:
@@ -13,13 +15,13 @@ on:
         required: true
       descripcion:
         required: true
-      imagen:
+      archivo:
         required: false
-      pdf:
+      video:
         required: false
       audio:
         required: false
-      video:
+      imagen:
         required: false
 
 jobs:
@@ -36,23 +38,24 @@ jobs:
         with:
           node-version: 18
 
-      - name: Update JSON
+      - name: Run update script
         run: node scripts/update.js
         env:
           TIPO: ${{ inputs.tipo }}
+          ID: ${{ inputs.id }}
           TITULO: ${{ inputs.titulo }}
           AUTOR: ${{ inputs.autor }}
           CATEGORIA: ${{ inputs.categoria }}
           DESCRIPCION: ${{ inputs.descripcion }}
-          IMAGEN: ${{ inputs.imagen }}
-          PDF: ${{ inputs.pdf }}
-          AUDIO: ${{ inputs.audio }}
+          ARCHIVO: ${{ inputs.archivo }}
           VIDEO: ${{ inputs.video }}
+          AUDIO: ${{ inputs.audio }}
+          IMAGEN: ${{ inputs.imagen }}
 
       - name: Commit changes
         run: |
           git config user.name "github-actions"
           git config user.email "actions@github.com"
           git add .
-          git commit -m "Nuevo contenido ${{ inputs.tipo }}" || echo "sin cambios"
+          git commit -m "upload ${{ inputs.tipo }}" || echo "no changes"
           git push
