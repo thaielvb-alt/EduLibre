@@ -123,8 +123,15 @@ src="${libro.video}">
 
 function leerLibro(){
 
-location.href =
-"/EduLibre/" + libro.pdf;
+const ruta =
+window.location.origin +
+"/EduLibre/" +
+libro.pdf;
+
+
+window.location.href =
+"pdfjs/web/viewer.html?file=" +
+encodeURIComponent(ruta);
 
 }
 

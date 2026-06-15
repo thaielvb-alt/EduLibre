@@ -22,7 +22,7 @@
     "categoria": "Literatura",
     "descripcion": "Una de las novelas más importantes de Latinoamérica.",
     "imagen": "imagenes/pedro_paramo.jpg",
-    "pdf": "PedroParamo.pdf",
+    "pdf": "libros/PedroParamo.pdf",
     "audio": "audios/PedroParamo.mp3",
     "video": "videos/PedroParamo.mp4",
     "recomendado": true
