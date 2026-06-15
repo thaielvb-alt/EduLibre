@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Detalle</title>
+
+<link rel="stylesheet"
+href="style.css">
+
+</head>
+
+<body>
+
+<div
+id="articulo"
+class="articulo">
+</div>
+
+<script>
+
+const libro =
+JSON.parse(
+localStorage.getItem(
+"libroActual"
+)
+);
+
+if(!libro){
+
+location.href =
+"index.html";
+
+}
+
+document
+.getElementById("articulo")
+.innerHTML = `
+
+<img
+src="${libro.imagen}"
+onerror="
+this.src='imagenes/default.png'
+">
+
+<h1>${libro.titulo}</h1>
+
+<h3>✍ ${libro.autor}</h3>
+
+<p>
+📚 ${libro.categoria}
+</p>
+
+<br>
+
+<p>
+${libro.descripcion}
+</p>
+
+<div class="botones">
+
+<button
+class="btn"
+onclick="leerLibro()">
+
+📖 Leer
+
+</button>
+
+<a
+class="btn"
+href="${libro.pdf}"
+download>
+
+⬇ Descargar
+
+</a>
+
+<a
+class="btn"
+href="index.html">
+
+⬅ Volver
+
+</a>
+
+</div>
+
+${libro.audio ? `
+
+<h2>🎧 Audio</h2>
+
+<audio controls>
+
+<source
+src="${libro.audio}">
+
+</audio>
+
+` : ""}
+
+${libro.video ? `
+
+<h2>🎥 Video</h2>
+
+<video
+controls
+width="100%">
+
+<source
+src="${libro.video}">
+
+</video>
+
+` : ""}
+
+`;
+
+function leerLibro(){
+
+const ruta =
+"/libros/" +
+libro.pdf.split("/").pop();
+
+location.href =
+"pdfjs/web/viewer.html?file=" +
+encodeURIComponent(ruta);
+
+}
+
+</script>
+
+</body>
+
+</html>

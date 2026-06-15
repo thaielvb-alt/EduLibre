@@ -1,0 +1,90 @@
+[
+  {
+    "id": "reina_mab",
+    "fecha":"2026-06-08",
+    "tipo": "libro",
+    "titulo": "El Velo de la Reina Mab",
+    "autor": "Rubén Darío",
+    "categoria": "Literatura",
+    "descripcion": "Es un cuento modernista sobre cuatro artistas frustrados.",
+    "imagen": "imagenes/ReinaMab.jpg",
+    "pdf": "ReinaMab.pdf",
+    "audio": "audios/ReinaMab.mp3",
+    "video": "videos/ReinaMab.mp4",
+    "recomendado": false
+  },
+  {
+    "id": "pedro_paramo",
+    "fecha":"2026-06-08",
+    "tipo": "libro",
+    "titulo": "Pedro Páramo",
+    "autor": "Juan Rulfo",
+    "categoria": "Literatura",
+    "descripcion": "Una de las novelas más importantes de Latinoamérica.",
+    "imagen": "imagenes/pedro_paramo.jpg",
+    "pdf": "PedroParamo.pdf",
+    "audio": "audios/PedroParamo.mp3",
+    "video": "videos/PedroParamo.mp4",
+    "recomendado": true
+  },
+  {
+    "id": "invencion_morel",
+    "fecha": "2026-06-07",
+    "tipo": "libro",
+    "titulo": "La Invencion de Morel",
+    "autor": "Adolfo Bioy Casares",
+    "categoria": "Literatura",
+    "descripcion": "Una de las novelas sobre invencion :).",
+    "imagen": "imagenes/InvencionMorel.jpg",
+    "pdf": "InvencionMorel.pdf",
+    "recomendado": true
+  },
+  {
+    "id": "aleman_cada_dia",
+    "fecha": "2026-06-07",
+    "tipo": "libro",
+    "titulo": "Aleman de Cada Dia",
+    "autor": "IDIOMAS PONS",
+    "categoria": "Literatura",
+    "descripcion": "La manera mas sencilla de iniciarse en la lengua alemana.",
+    "imagen": "imagenes/AlemanCadaDia.jpg",
+    "pdf": "AlemanCadaDia.pdf",
+    "recomendado": false
+  },
+  {
+    "id": "curso_gramatica_aleman",
+    "fecha": "2026-06-07",
+    "tipo": "libro",
+    "titulo": "Curso de gramática básica para estudiantes de alemán",
+    "autor": "Natalia Carbajosa - UPCT",
+    "categoria": "Literatura",
+    "descripcion": "Curso de gramática básica para estudiantes de alemán.",
+    "imagen": "imagenes/CursoGramaticaAleman.jpg",
+    "pdf": "CursoGramaticaAleman.pdf",
+    "recomendado": false
+  },
+  {
+    "id": "HumanAnatomyForArtists",
+    "fecha": "2026-06-07",
+    "tipo": "libro",
+    "titulo": "Human Anatomy for Artists - The Elements of Form",
+    "autor": "Eliot Goldfinger",
+    "categoria": "Arte",
+    "descripcion": "The human anatomy for artists by Eliot Goldfinger of Oxford University Press - 1991.",
+    "imagen": "imagenes/HumanAnatomyForArtists.jpg",
+    "pdf": "HumanAnatomyForArtists.pdf",
+    "recomendado": false
+  },
+  {
+    "id": "AristotelesPoetica",
+    "fecha": "2026-06-07",
+    "tipo": "libro",
+    "titulo": "La Poetica",
+    "autor": "Aristoteles",
+    "categoria": "Poetica",
+    "descripcion": "La Poetica - Aristoteles",
+    "imagen": "imagenes/AristotelesPoetica.jpg",
+    "pdf": "AristotelesPoetica.pdf",
+    "recomendado": false
+  }
+]

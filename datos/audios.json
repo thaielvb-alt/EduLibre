@@ -1,0 +1,14 @@
+[
+  {
+    "id": "podcast_historia",
+    "fecha":"2026-06-08",
+    "tipo": "audio",
+    "titulo": "Historia Argentina - 24 de Marzo de 1976",
+    "autor": "EduLibre",
+    "categoria": "Historia",
+    "descripcion": "Podcast educativo corto.",
+    "imagen": "imagenes/historia.jpg",
+    "audio": "audios/24Marzo1976.mp3",
+    "recomendado": false
+  }
+]

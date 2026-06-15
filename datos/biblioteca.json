@@ -1,0 +1,41 @@
+[
+  {
+    "id": 1,
+    "tipo": "libro",
+    "titulo": "El Velo de la Reina Mab",
+    "autor": "Rubén Darío",
+    "categoria": "Literatura",
+    "descripcion": "Es un cuento modernista sobre cuatro artistas frustrados.",
+    "imagen": "imagenes/ReinaMab.jpg",
+    "pdf": "libros/ReinaMab.pdf",
+    "audio": "audios/ReinaMab.mp3",
+    "video": "videos/ReinaMab.mp4",
+    "recomendado": true
+  },
+  {
+    "id": 2,
+    "tipo": "libro",
+    "titulo": "Álgebra Básica",
+    "autor": "Profesor Matemáticas",
+    "categoria": "Matemática",
+    "descripcion": "Conceptos fundamentales de álgebra.",
+    "imagen": "imagenes/algebra.jpg",
+    "pdf": "libros/algebra.pdf",
+    "audio": null,
+    "video": null,
+    "recomendado": false
+  },
+  {
+    "id": 3,
+    "tipo": "libro",
+    "titulo": "Pedro Páramo",
+    "autor": "Juan Rulfo",
+    "categoria": "Literatura",
+    "descripcion": "Una de las novelas más importantes de Latinoamérica.",
+    "imagen": "imagenes/pedro_paramo.jpg",
+    "pdf": "libros/PedroParamo.pdf",
+    "audio": "audios/PedroParamo.mp3",
+    "video": "videos/PedroParamo.mp4",
+    "recomendado": true
+  },
+]

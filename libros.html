@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Libros</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav>
+<h1>📖 Libros</h1>
+</nav>
+
+<main id="contenido"></main>
+
+<script>
+
+async function cargar(){
+
+const libros =
+await fetch(
+"datos/libros.json"
+)
+.then(r=>r.json());
+
+const contenido =
+document.getElementById(
+"contenido"
+);
+
+libros.forEach(item=>{
+
+contenido.innerHTML += `
+
+<div class="card">
+
+<img
+src="${item.imagen}">
+
+<div class="card-content">
+
+<h3>${item.titulo}</h3>
+
+<p>${item.descripcion}</p>
+
+<button
+class="btn"
+onclick="abrir('${item.id}')">
+
+Ver
+
+</button>
+
+</div>
+
+</div>
+
+`;
+
+});
+
+}
+
+async function abrir(id){
+
+const libros =
+await fetch(
+"datos/libros.json"
+)
+.then(r=>r.json());
+
+const libro =
+libros.find(
+x=>x.id===id
+);
+
+localStorage.setItem(
+"libroActual",
+JSON.stringify(libro)
+);
+
+location.href =
+"articulo.html";
+
+}
+
+cargar();
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,28 @@
+[
+  {
+    "id": "ComoEstudiarYDisciplina",
+    "fecha":"2026-06-08",
+    "tipo": "guia",
+    "titulo": "Cómo estudiar y aprender una disciplina",
+    "autor": "Richard Paul y Linda Elder",
+    "categoria": "Educación",
+    "descripcion": "Guia del pensador para estudiantes sobre cómo estudiar y aprender una disciplina usando los conceptos y herramientas del pensamiento critico.",
+    "imagen": "imagenes/ComoEstudiarYDisciplina.jpg",
+    "pdf": "guias/ComoEstudiarYDisciplina.pdf",
+    "video": "videos/estudio.mp4",
+    "guia": "guias/como_estudiar.html",
+    "recomendado": false
+  },
+  {
+    "id": "GuiaCaminantes",
+    "fecha": "2026-06-07",
+    "tipo": "guia",
+    "titulo": "Guia para dirigentes de la Rama Caminantes",
+    "autor": "Scouts de Argentina",
+    "categoria": "Practica",
+    "descripcion": "Guia para dirigentes de la Rama Caminantes - Scouts de Argentina.",
+    "imagen": "imagenes/GuiaCaminantes.jpg",
+    "pdf": "GuiaCaminantes.pdf",
+    "recomendado": false
+  }
+]

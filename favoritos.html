@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Favoritos</title>
+
+<link rel="stylesheet"
+href="style.css">
+
+</head>
+
+<body>
+
+<nav>
+
+<h1>⭐ Favoritos</h1>
+
+</nav>
+
+<main id="contenido"></main>
+
+<script>
+
+async function cargar(){
+
+const favoritos =
+JSON.parse(
+localStorage.getItem(
+"favoritos"
+)
+) || [];
+
+const respuesta =
+await fetch(
+"datos/biblioteca.json"
+);
+
+const biblioteca =
+await respuesta.json();
+
+const lista =
+biblioteca.filter(
+item=>
+favoritos.includes(
+item.id
+)
+);
+
+const contenido =
+document.getElementById(
+"contenido"
+);
+
+if(
+lista.length===0
+){
+
+contenido.innerHTML =
+
+"<h2 style='padding:20px'>No hay favoritos.</h2>";
+
+return;
+
+}
+
+lista.forEach(item=>{
+
+contenido.innerHTML += `
+
+<div class="card">
+
+<img
+src="${item.imagen}">
+
+<div class="card-content">
+
+<h3>${item.titulo}</h3>
+
+<p>${item.descripcion}</p>
+
+<a
+class="btn"
+href="javascript:abrir(${item.id})">
+
+Abrir
+
+</a>
+
+</div>
+
+</div>
+
+`;
+
+});
+
+}
+
+function abrir(id){
+
+fetch(
+"datos/biblioteca.json"
+)
+.then(r=>r.json())
+.then(biblioteca=>{
+
+const libro =
+biblioteca.find(
+x=>x.id==id
+);
+
+localStorage.setItem(
+
+"libroActual",
+
+JSON.stringify(
+libro
+)
+
+);
+
+location.href =
+"articulo.html";
+
+});
+
+}
+
+cargar();
+
+</script>
+
+</body>
+
+</html>

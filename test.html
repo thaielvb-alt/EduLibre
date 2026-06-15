@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Biblioteca y Guías de Estudio</title>
+
+<style>
+body{
+    margin:0;
+    font-family:Arial, sans-serif;
+    background:#f5f7fa;
+}
+
+header{
+    background:#2563eb;
+    color:white;
+    text-align:center;
+    padding:30px;
+}
+
+header h1{
+    margin:0;
+}
+
+.search{
+    text-align:center;
+    padding:20px;
+}
+
+.search input{
+    width:70%;
+    max-width:500px;
+    padding:10px;
+    border:1px solid #ccc;
+    border-radius:8px;
+}
+
+section{
+    padding:20px;
+}
+
+.cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:20px;
+}
+
+.card{
+    background:white;
+    border-radius:12px;
+    padding:15px;
+    box-shadow:0 2px 10px rgba(0,0,0,0.1);
+}
+
+.card h3{
+    color:#2563eb;
+}
+
+.btn{
+    display:inline-block;
+    margin-top:10px;
+    padding:8px 15px;
+    background:#2563eb;
+    color:white;
+    text-decoration:none;
+    border-radius:6px;
+}
+
+footer{
+    text-align:center;
+    padding:20px;
+    background:#1e293b;
+    color:white;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>📚 EduLibre</h1>
+    <p>Guías de estudio y biblioteca digital gratuita</p>
+</header>
+
+<div class="search">
+    <input type="text" placeholder="Buscar tema, libro, audio o video...">
+</div>
+
+<section>
+    <h2>🎓 Guías de Estudio</h2>
+
+    <div class="cards">
+        <div class="card">
+            <h3>Matemáticas</h3>
+            <p>Álgebra, geometría, funciones y ejercicios resueltos.</p>
+            <a href="#" class="btn">Ver guía</a>
+        </div>
+
+        <div class="card">
+            <h3>Historia</h3>
+            <p>Resúmenes, líneas de tiempo y conceptos importantes.</p>
+            <a href="#" class="btn">Ver guía</a>
+        </div>
+
+        <div class="card">
+            <h3>Programación</h3>
+            <p>HTML, CSS, JavaScript, Python y más.</p>
+            <a href="#" class="btn">Ver guía</a>
+        </div>
+    </div>
+</section>
+
+<section>
+    <h2>📖 Biblioteca Digital</h2>
+
+    <div class="cards">
+        <div class="card">
+            <h3>Libros</h3>
+            <p>Acceso a libros gratuitos de estudio y referencia.</p>
+            <a href="#" class="btn">Explorar</a>
+        </div>
+
+        <div class="card">
+            <h3>Audiolibros</h3>
+            <p>Escucha contenido educativo desde cualquier dispositivo.</p>
+            <a href="#" class="btn">Escuchar</a>
+        </div>
+
+        <div class="card">
+            <h3>Videos Educativos</h3>
+            <p>Cursos y explicaciones visuales de múltiples materias.</p>
+            <a href="#" class="btn">Ver videos</a>
+        </div>
+    </div>
+</section>
+
+<section>
+    <h2>⭐ Recomendados</h2>
+
+    <div class="cards">
+        <div class="card">
+            <h3>Cómo estudiar mejor</h3>
+            <p>Técnicas de estudio, memoria y organización.</p>
+        </div>
+
+        <div class="card">
+            <h3>Introducción a la Física</h3>
+            <p>Conceptos básicos para comenzar.</p>
+        </div>
+
+        <div class="card">
+            <h3>Aprender Python</h3>
+            <p>Curso completo desde cero.</p>
+        </div>
+    </div>
+</section>
+
+<footer>
+    © 2026 EduLibre - Educación accesible para todos
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,14 @@
+[
+  {
+    "id": "curso_html",
+    "fecha":"2026-06-08",
+    "tipo": "video",
+    "titulo": "Curso Básico de HTML desde 0 - Introducción",
+    "autor": "FalconMasters",
+    "categoria": "Programación",
+    "descripcion": "https://youtu.be/cqMfPS8jPys?si=TgFIIJUxWEUkU576",
+    "imagen": "imagenes/html.jpg",
+    "video": "videos/cursoHTML-0.mp4",
+    "recomendado": false
+  }
+]

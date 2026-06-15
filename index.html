@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EduLibre</title>
+
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav>
+
+<h1>📚 EduLibre</h1>
+
+<input
+type="text"
+id="search"
+placeholder="Buscar recursos...">
+
+</nav>
+
+<section class="hero">
+
+<h1>📚 Educación libre para todos</h1>
+
+<p>
+Libros, audios, videos y recursos educativos gratuitos.
+</p>
+
+</section>
+
+<section class="secciones">
+
+<a class="seccion-card"
+href="libros.html">
+
+📖 Libros
+
+</a>
+
+<a class="seccion-card"
+href="videos.html">
+
+🎥 Videos
+
+</a>
+
+<a class="seccion-card"
+href="audios.html">
+
+🎧 Audios
+
+</a>
+
+<a class="seccion-card"
+href="guias.html">
+
+🎓 Guías
+
+</a>
+
+</section>
+
+<div class="acciones">
+
+<button onclick="location.href='favoritos.html'">
+⭐ Favoritos
+</button>
+
+<button onclick="location.href='historial.html'">
+🕒 Historial
+</button>
+
+<button onclick="toggleDark()">
+🌙 Tema
+</button>
+
+</div>
+
+<div class="categorias">
+
+<button onclick="filtrarCategoria('Todas')">
+Todas
+</button>
+
+<button onclick="filtrarCategoria('Literatura')">
+Literatura
+</button>
+
+<button onclick="filtrarCategoria('Matemática')">
+Matemática
+</button>
+
+<button onclick="filtrarCategoria('Historia')">
+Historia
+</button>
+
+<button onclick="filtrarCategoria('Programación')">
+Programación
+</button>
+
+<button onclick="filtrarCategoria('Arte')">
+Arte
+</button>
+
+</div>
+
+<header>
+
+<h2>Biblioteca Digital</h2>
+
+<p>
+Libros, artículos y recursos educativos.
+</p>
+
+</header>
+
+<main id="contenido"></main>
+
+<section>
+
+<h2 style="padding:20px">
+
+⭐ Recomendados
+
+</h2>
+
+<div
+id="recomendados">
+
+</div>
+
+</section>
+
+<script src="script.js"></script>
+
+</body>
+</html>
