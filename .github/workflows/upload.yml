@@ -1,4 +1,4 @@
-name: Subir contenido EduLibre
+name: EduLibre Upload System
 
 on:
   workflow_dispatch:
@@ -9,12 +9,18 @@ on:
         required: true
       autor:
         required: true
+      categoria:
+        required: true
       descripcion:
         required: true
       imagen:
-        required: true
-      archivo:
-        required: true
+        required: false
+      pdf:
+        required: false
+      audio:
+        required: false
+      video:
+        required: false
 
 jobs:
   build:
@@ -30,17 +36,20 @@ jobs:
         with:
           node-version: 18
 
-      - name: Ejecutar update
+      - name: Update JSON
         run: node scripts/update.js
         env:
           TIPO: ${{ inputs.tipo }}
           TITULO: ${{ inputs.titulo }}
           AUTOR: ${{ inputs.autor }}
+          CATEGORIA: ${{ inputs.categoria }}
           DESCRIPCION: ${{ inputs.descripcion }}
           IMAGEN: ${{ inputs.imagen }}
-          ARCHIVO: ${{ inputs.archivo }}
+          PDF: ${{ inputs.pdf }}
+          AUDIO: ${{ inputs.audio }}
+          VIDEO: ${{ inputs.video }}
 
-      - name: Commit
+      - name: Commit changes
         run: |
           git config user.name "github-actions"
           git config user.email "actions@github.com"

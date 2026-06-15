@@ -1,13 +1,4 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-<meta charset="UTF-8">
-<title>Subir contenido</title>
-<link rel="stylesheet" href="style.css">
-</head>
-<body>
-
-<h1>Subir a EduLibre</h1>
+<h1>Subir contenido EduLibre</h1>
 
 <select id="tipo">
   <option value="libros">Libro</option>
@@ -18,24 +9,29 @@
 
 <input id="titulo" placeholder="Título">
 <input id="autor" placeholder="Autor">
-
+<input id="categoria" placeholder="Categoría">
 <textarea id="descripcion" placeholder="Descripción"></textarea>
 
 <input id="imagen" placeholder="URL imagen">
-<input id="archivo" placeholder="URL archivo (pdf/mp4/mp3)">
+<input id="pdf" placeholder="URL PDF (si aplica)">
+<input id="audio" placeholder="URL audio (si aplica)">
+<input id="video" placeholder="URL video (si aplica)">
 
 <button onclick="subir()">Subir</button>
 
 <script>
 async function subir(){
 
-  const inputs = {
+  const data = {
     tipo: document.getElementById("tipo").value,
     titulo: document.getElementById("titulo").value,
     autor: document.getElementById("autor").value,
+    categoria: document.getElementById("categoria").value,
     descripcion: document.getElementById("descripcion").value,
     imagen: document.getElementById("imagen").value,
-    archivo: document.getElementById("archivo").value
+    pdf: document.getElementById("pdf").value,
+    audio: document.getElementById("audio").value,
+    video: document.getElementById("video").value
   };
 
   await fetch("https://api.github.com/repos/TU_USUARIO/EduLibre/actions/workflows/upload.yml/dispatches", {
@@ -47,13 +43,10 @@ async function subir(){
     },
     body: JSON.stringify({
       ref: "main",
-      inputs
+      inputs: data
     })
   });
 
-  alert("Subido correctamente (GitHub Actions)");
+  alert("Subido correctamente");
 }
 </script>
-
-</body>
-</html>
