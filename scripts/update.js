@@ -1,21 +1,28 @@
 const fs = require("fs");
 
-const file = "datos/biblioteca.json";
+const tipo = process.env.TIPO;
 
-let data = JSON.parse(fs.readFileSync(file, "utf-8"));
+const archivoJSON = `datos/${tipo}.json`;
+
+let data = [];
+
+try {
+    data = JSON.parse(fs.readFileSync(archivoJSON, "utf-8"));
+} catch (e) {
+    console.log("JSON vacío o corrupto, creando nuevo");
+    data = [];
+}
 
 const nuevo = {
     id: Date.now(),
     titulo: process.env.TITULO,
     autor: process.env.AUTOR,
     descripcion: process.env.DESCRIPCION,
-    categoria: process.env.CATEGORIA,
-    imagen: process.env.IMAGEN || "",
-    pdf: process.env.PDF || ""
+    archivo: process.env.ARCHIVO
 };
 
 data.push(nuevo);
 
-fs.writeFileSync(file, JSON.stringify(data, null, 2));
+fs.writeFileSync(archivoJSON, JSON.stringify(data, null, 2));
 
-console.log("Libro agregado");
+console.log("Contenido agregado en " + tipo);

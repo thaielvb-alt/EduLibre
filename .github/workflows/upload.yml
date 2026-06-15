@@ -3,46 +3,44 @@ name: Subir contenido EduLibre
 on:
   workflow_dispatch:
     inputs:
+      tipo:
+        required: true
       titulo:
         required: true
       autor:
         required: true
       descripcion:
         required: true
-      categoria:
+      archivo:
         required: true
-      imagen:
-        required: false
-      pdf:
-        required: false
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
-    steps:
-      - name: Checkout repo
-        uses: actions/checkout@v4
+    permissions:
+      contents: write
 
-      - name: Configurar Node
-        uses: actions/setup-node@v4
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
         with:
           node-version: 18
 
-      - name: Actualizar biblioteca.json
+      - name: Ejecutar update
         run: node scripts/update.js
         env:
+          TIPO: ${{ inputs.tipo }}
           TITULO: ${{ inputs.titulo }}
           AUTOR: ${{ inputs.autor }}
           DESCRIPCION: ${{ inputs.descripcion }}
-          CATEGORIA: ${{ inputs.categoria }}
-          IMAGEN: ${{ inputs.imagen }}
-          PDF: ${{ inputs.pdf }}
+          ARCHIVO: ${{ inputs.archivo }}
 
       - name: Commit cambios
         run: |
           git config user.name "github-actions"
           git config user.email "actions@github.com"
           git add .
-          git commit -m "Nuevo contenido agregado" || echo "sin cambios"
+          git commit -m "Nuevo contenido ${{ inputs.tipo }}" || echo "sin cambios"
           git push
