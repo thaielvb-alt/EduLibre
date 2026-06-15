@@ -1,0 +1,35 @@
+<h1>Subir contenido</h1>
+
+<input id="titulo" placeholder="Título">
+<input id="autor" placeholder="Autor">
+<input id="desc" placeholder="Descripción">
+<input id="cat" placeholder="Categoría">
+
+<button onclick="subir()">Subir</button>
+
+<script>
+async function subir(){
+
+    const data = {
+        titulo: document.getElementById("titulo").value,
+        autor: document.getElementById("autor").value,
+        descripcion: document.getElementById("desc").value,
+        categoria: document.getElementById("cat").value
+    };
+
+    await fetch("https://api.github.com/repos/TU_USUARIO/EduLibre/actions/workflows/upload.yml/dispatches", {
+        method: "POST",
+        headers: {
+            "Accept": "application/vnd.github+json",
+            "Authorization": "Bearer TU_GITHUB_TOKEN",
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            ref: "main",
+            inputs: data
+        })
+    });
+
+    alert("Subido (procesando en GitHub)");
+}
+</script>
