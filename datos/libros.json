@@ -8,7 +8,7 @@
     "categoria": "Literatura",
     "descripcion": "Es un cuento modernista sobre cuatro artistas frustrados.",
     "imagen": "imagenes/ReinaMab.jpg",
-    "pdf": "ReinaMab2.pdf",
+    "pdf": "libros/ReinaMab.pdf",
     "audio": "audios/ReinaMab.mp3",
     "video": "videos/ReinaMab.mp4",
     "recomendado": false
