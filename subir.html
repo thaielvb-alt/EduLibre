@@ -1,45 +1,50 @@
-<h1>Subir artículo</h1>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Subir</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
 
-<label>Título</label>
-<input id="titulo">
+<h1 style="text-align:center">Subir artículo</h1>
 
-<label>Tipo</label>
-<select id="tipo">
-  <option value="libros">Libro</option>
-  <option value="videos">Video</option>
-  <option value="audios">Audio</option>
-  <option value="guias">Guía</option>
-</select>
+<div class="panel">
 
-<label>Autor</label>
-<input id="autor">
+  <input id="titulo" placeholder="Título">
 
-<label>Categoría</label>
-<input id="categoria">
+  <select id="tipo">
+    <option value="libros">Libro</option>
+    <option value="videos">Video</option>
+    <option value="audios">Audio</option>
+    <option value="guias">Guía</option>
+  </select>
 
-<label>Descripción</label>
-<textarea id="descripcion"></textarea>
+  <input id="autor" placeholder="Autor">
+  <input id="categoria" placeholder="Categoría">
+  <textarea id="descripcion" placeholder="Descripción"></textarea>
 
-<label>Archivo principal</label>
-<input type="file" id="archivo">
+  <label>PDF / Archivo</label>
+  <input type="file" id="archivo">
 
-<label>Video (opcional)</label>
-<input type="file" id="video">
+  <label>Video</label>
+  <input type="file" id="video">
 
-<label>Audio (opcional)</label>
-<input type="file" id="audio">
+  <label>Audio</label>
+  <input type="file" id="audio">
 
-<label>Imagen</label>
-<input type="file" id="imagen">
+  <label>Imagen</label>
+  <input type="file" id="imagen">
 
-<button onclick="subir()">Subir</button>
+  <button onclick="subir()">Subir</button>
+
+</div>
 
 <script>
 function toBase64(file){
   return new Promise((res, rej)=>{
     const r = new FileReader();
     r.onload = () => res(r.result);
-    r.onerror = rej;
     r.readAsDataURL(file);
   });
 }
@@ -52,42 +57,40 @@ async function subir(){
   const categoria = document.getElementById("categoria").value;
   const descripcion = document.getElementById("descripcion").value;
 
-  const id = titulo
-  .toLowerCase()
-  .replace(/\s+/g, "_")
-  .replace(/[^a-z0-9_]/g, "");
+  const id = titulo.toLowerCase().replace(/\s+/g,"_");
 
   const archivo = document.getElementById("archivo").files[0];
   const video = document.getElementById("video").files[0];
   const audio = document.getElementById("audio").files[0];
   const imagen = document.getElementById("imagen").files[0];
 
-  const payload = {
-    tipo,
-    id,
-    titulo,
-    autor,
-    categoria,
-    descripcion,
-    archivo: archivo ? await toBase64(archivo) : "",
-    video: video ? await toBase64(video) : "",
-    audio: audio ? await toBase64(audio) : "",
-    imagen: imagen ? await toBase64(imagen) : ""
-  };
-
   await fetch("https://api.github.com/repos/TU_USUARIO/EduLibre/actions/workflows/upload.yml/dispatches", {
-    method: "POST",
-    headers: {
-      "Accept": "application/vnd.github+json",
-      "Authorization": "Bearer TU_TOKEN",
-      "Content-Type": "application/json"
+    method:"POST",
+    headers:{
+      "Authorization":"Bearer TU_TOKEN",
+      "Accept":"application/vnd.github+json",
+      "Content-Type":"application/json"
     },
     body: JSON.stringify({
-      ref: "main",
-      inputs: payload
+      ref:"main",
+      inputs:{
+        tipo,
+        id,
+        titulo,
+        autor,
+        categoria,
+        descripcion,
+        archivo: archivo ? await toBase64(archivo) : "",
+        video: video ? await toBase64(video) : "",
+        audio: audio ? await toBase64(audio) : "",
+        imagen: imagen ? await toBase64(imagen) : ""
+      }
     })
   });
 
-  alert("Subida enviada");
+  alert("Subiendo...");
 }
 </script>
+
+</body>
+</html>
