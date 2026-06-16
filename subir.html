@@ -5,9 +5,10 @@
 <title>Subir</title>
 <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-<h1 style="text-align:center">Subir artículo</h1>
+<h1 style="text-align:center">Subir contenido</h1>
 
 <div class="panel">
 
@@ -24,7 +25,7 @@
   <input id="categoria" placeholder="Categoría">
   <textarea id="descripcion" placeholder="Descripción"></textarea>
 
-  <label>PDF / Archivo</label>
+  <label>Archivo</label>
   <input type="file" id="archivo">
 
   <label>Video</label>
@@ -42,7 +43,7 @@
 
 <script>
 function toBase64(file){
-  return new Promise((res, rej)=>{
+  return new Promise(res=>{
     const r = new FileReader();
     r.onload = () => res(r.result);
     r.readAsDataURL(file);
@@ -64,10 +65,9 @@ async function subir(){
   const audio = document.getElementById("audio").files[0];
   const imagen = document.getElementById("imagen").files[0];
 
-  await fetch("https://api.github.com/repos/TU_USUARIO/EduLibre/actions/workflows/upload.yml/dispatches", {
+  await fetch("https://api.github.com/repos/thaielvb-alt/EduLibre/actions/workflows/upload.yml/dispatches", {
     method:"POST",
     headers:{
-      "Authorization":"Bearer TU_TOKEN",
       "Accept":"application/vnd.github+json",
       "Content-Type":"application/json"
     },
@@ -88,7 +88,7 @@ async function subir(){
     })
   });
 
-  alert("Subiendo...");
+  alert("Subida enviada, espera Actions");
 }
 </script>
 

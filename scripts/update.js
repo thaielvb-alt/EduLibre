@@ -1,68 +1,88 @@
 const fs = require("fs");
 
-const tipo = process.env.TIPO;
-const id = process.env.ID;
-
-if (!tipo || !id) {
-  throw new Error("Faltan datos básicos (tipo o id)");
+function decode(file){
+  if(!file) return null;
+  const base64 = file.split(",")[1];
+  return Buffer.from(base64, "base64");
 }
 
-const jsonPath = `datos/${tipo}.json`;
+function saveFile(path, data){
+  if(!data) return;
+  fs.writeFileSync(path, data);
+}
 
-// cargar JSON de forma segura
+/* =========================
+   INPUTS
+========================= */
+
+const tipo = process.env.INPUT_TIPO;
+const id = process.env.INPUT_ID;
+const titulo = process.env.INPUT_TITULO;
+const autor = process.env.INPUT_AUTOR;
+const categoria = process.env.INPUT_CATEGORIA;
+const descripcion = process.env.INPUT_DESCRIPCION;
+
+const archivo = decode(process.env.INPUT_ARCHIVO);
+const video = decode(process.env.INPUT_VIDEO);
+const audio = decode(process.env.INPUT_AUDIO);
+const imagen = decode(process.env.INPUT_IMAGEN);
+
+/* =========================
+   RUTAS
+========================= */
+
+const dirMap = {
+  libros: "libros",
+  videos: "videos",
+  audios: "audios",
+  guias: "guias"
+};
+
+const carpeta = dirMap[tipo] || "libros";
+
+/* =========================
+   GUARDAR ARCHIVOS
+========================= */
+
+if(imagen)
+  saveFile(`${carpeta}/${id}.jpg`, imagen);
+
+if(archivo)
+  saveFile(`${carpeta}/${id}.pdf`, archivo);
+
+if(video)
+  saveFile(`${carpeta}/${id}.mp4`, video);
+
+if(audio)
+  saveFile(`${carpeta}/${id}.mp3`, audio);
+
+/* =========================
+   ACTUALIZAR JSON
+========================= */
+
+const jsonPath = `datos/${carpeta}.json`;
+
 let data = [];
-try {
-  const raw = fs.readFileSync(jsonPath, "utf-8");
-  const parsed = JSON.parse(raw);
-  data = Array.isArray(parsed) ? parsed : [];
-} catch {
-  data = [];
+
+if(fs.existsSync(jsonPath)){
+  data = JSON.parse(fs.readFileSync(jsonPath));
 }
 
-// fecha
-const fecha = new Date().toISOString().split("T")[0];
-
-// guardar base64
-function saveBase64(file, path) {
-  if (!file) return;
-
-  try {
-    const base64 = file.split(",")[1];
-    fs.writeFileSync(path, Buffer.from(base64, "base64"));
-  } catch (e) {
-    console.log("Error guardando archivo:", path);
-  }
-}
-
-// crear carpetas
-fs.mkdirSync(tipo, { recursive: true });
-fs.mkdirSync("imagenes", { recursive: true });
-
-// guardar archivos
-saveBase64(process.env.ARCHIVO, `${tipo}/${id}.pdf`);
-saveBase64(process.env.VIDEO, `${tipo}/${id}.mp4`);
-saveBase64(process.env.AUDIO, `${tipo}/${id}.mp3`);
-saveBase64(process.env.IMAGEN, `imagenes/${id}.jpg`);
-
-// objeto final (TU ESTRUCTURA EXACTA)
 const nuevo = {
   id,
-  fecha,
-  tipo,
-  titulo: process.env.TITULO || "",
-  autor: process.env.AUTOR || "",
-  categoria: process.env.CATEGORIA || "",
-  descripcion: process.env.DESCRIPCION || "",
-  imagen: `imagenes/${id}.jpg`,
-  pdf: tipo === "libros" ? `${tipo}/${id}.pdf` : "",
-  video: tipo === "videos" ? `${tipo}/${id}.mp4` : "",
-  audio: tipo === "audios" ? `${tipo}/${id}.mp3` : "",
+  fecha: new Date().toISOString().split("T")[0],
+  tipo: tipo.slice(0,-1),
+  titulo,
+  autor,
+  categoria,
+  descripcion,
+  imagen: `${carpeta}/${id}.jpg`,
+  pdf: `${carpeta}/${id}.pdf`,
+  video: `${carpeta}/${id}.mp4`,
+  audio: `${carpeta}/${id}.mp3`,
   recomendado: false
 };
 
 data.push(nuevo);
 
-// guardar limpio
 fs.writeFileSync(jsonPath, JSON.stringify(data, null, 2));
-
-console.log("OK subido:", id);
