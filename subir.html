@@ -1,83 +1,185 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Subir</title>
+
+<title>Subir contenido</title>
+
 <link rel="stylesheet" href="../style.css">
+
 </head>
+
 
 <body>
 
-<h1 style="text-align:center">Subir contenido</h1>
+
+<h1 style="text-align:center">
+📤 Subir contenido
+</h1>
+
 
 <div class="panel">
 
-  <input id="titulo" placeholder="Título">
 
-  <select id="tipo">
-    <option value="libros">Libro</option>
-    <option value="videos">Video</option>
-    <option value="audios">Audio</option>
-    <option value="guias">Guía</option>
-  </select>
+<input id="titulo" placeholder="Título">
 
-  <input id="autor" placeholder="Autor">
-  <input id="categoria" placeholder="Categoría">
-  <textarea id="descripcion" placeholder="Descripción"></textarea>
 
-  <label>Archivo</label>
-  <input type="file" id="archivo">
+<select id="tipo">
 
-  <label>Video</label>
-  <input type="file" id="video">
+<option value="libros">
+📖 Libro
+</option>
 
-  <label>Audio</label>
-  <input type="file" id="audio">
+<option value="videos">
+🎥 Video
+</option>
 
-  <label>Imagen</label>
-  <input type="file" id="imagen">
+<option value="audios">
+🎧 Audio
+</option>
 
-  <button onclick="subir()">Subir</button>
+<option value="guias">
+🎓 Guía
+</option>
+
+</select>
+
+
+<input id="autor" placeholder="Autor">
+
+
+<input id="categoria" placeholder="Categoría">
+
+
+<textarea 
+id="descripcion"
+placeholder="Descripción">
+</textarea>
+
+
+<label>
+Archivo principal
+</label>
+
+<input type="file" id="archivo">
+
+
+<label>
+Imagen
+</label>
+
+<input type="file" id="imagen">
+
+
+<button onclick="subir()">
+Subir
+</button>
+
 
 </div>
 
+
+
 <script>
+
+
 async function subir(){
 
-  const titulo = document.getElementById("titulo").value;
-  const tipo = document.getElementById("tipo").value;
-  const autor = document.getElementById("autor").value;
-  const categoria = document.getElementById("categoria").value;
-  const descripcion = document.getElementById("descripcion").value;
 
-  const id = titulo.toLowerCase().replace(/\s+/g,"_");
+const titulo =
+document.getElementById("titulo").value;
 
-  const body = `
-UPLOAD
-tipo: ${tipo}
-id: ${id}
-titulo: ${titulo}
-autor: ${autor}
-categoria: ${categoria}
-descripcion: ${descripcion}
-`;
 
-  await fetch("https://api.github.com/repos/thaielvb-alt/EduLibre/issues", {
-    method: "POST",
-    headers: {
-      "Accept": "application/vnd.github+json",
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({
-      title: "UPLOAD:" + titulo,
-      body: body
-    })
-  });
+const tipo =
+document.getElementById("tipo").value;
 
-  alert("Subida enviada ✔");
+
+const autor =
+document.getElementById("autor").value;
+
+
+const categoria =
+document.getElementById("categoria").value;
+
+
+const descripcion =
+document.getElementById("descripcion").value;
+
+
+
+const id =
+titulo
+.toLowerCase()
+.normalize("NFD")
+.replace(/[\u0300-\u036f]/g,"")
+.replace(/[^a-z0-9]+/g,"_");
+
+
+
+const respuesta =
+await fetch(
+"https://api.github.com/repos/thaielvb-alt/EduLibre/actions/workflows/upload.yml/dispatches",
+{
+
+method:"POST",
+
+headers:{
+
+"Accept":
+"application/vnd.github+json",
+
+"Content-Type":
+"application/json"
+
+},
+
+
+body:JSON.stringify({
+
+ref:"main",
+
+inputs:{
+
+tipo,
+id,
+titulo,
+autor,
+categoria,
+descripcion
+
 }
+
+})
+
+});
+
+
+
+if(respuesta.ok){
+
+alert(
+"Solicitud enviada correctamente"
+);
+
+}else{
+
+alert(
+"Error enviando solicitud"
+);
+
+}
+
+
+}
+
+
+
 </script>
 
+
 </body>
+
 </html>

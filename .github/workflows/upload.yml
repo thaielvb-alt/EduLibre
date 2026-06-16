@@ -1,27 +1,107 @@
 name: EduLibre Upload
 
+
 on:
-  issues:
-    types: [opened]
+
+  workflow_dispatch:
+
+    inputs:
+
+      tipo:
+        required: true
+
+      id:
+        required: true
+
+      titulo:
+        required: true
+
+      autor:
+        required: true
+
+      categoria:
+        required: true
+
+      descripcion:
+        required: true
+
+
 
 permissions:
+
   contents: write
-  issues: read
+
+
 
 jobs:
-  upload:
-    runs-on: ubuntu-latest
 
-    steps:
-      - uses: actions/checkout@v4
 
-      - name: Parse issue
-        run: node scripts/from-issue.js
+ upload:
 
-      - name: Commit changes
-        run: |
-          git config user.name "github-actions"
-          git config user.email "github-actions@github.com"
-          git add .
-          git commit -m "upload content" || exit 0
-          git push
+
+  runs-on: ubuntu-latest
+
+
+  steps:
+
+
+  - name: Descargar repo
+
+    uses: actions/checkout@v4
+
+
+
+  - name: Node
+
+    uses: actions/setup-node@v4
+
+    with:
+
+      node-version: 18
+
+
+
+  - name: Ejecutar actualización
+
+    run: node scripts/update.js
+
+    env:
+
+      INPUT_TIPO:
+        ${{ inputs.tipo }}
+
+      INPUT_ID:
+        ${{ inputs.id }}
+
+      INPUT_TITULO:
+        ${{ inputs.titulo }}
+
+      INPUT_AUTOR:
+        ${{ inputs.autor }}
+
+      INPUT_CATEGORIA:
+        ${{ inputs.categoria }}
+
+      INPUT_DESCRIPCION:
+        ${{ inputs.descripcion }}
+
+
+
+  - name: Guardar cambios
+
+
+    run: |
+
+
+      git config user.name "github-actions"
+
+      git config user.email "github-actions@github.com"
+
+
+      git add .
+
+
+      git commit -m "Nuevo articulo" || exit 0
+
+
+      git push

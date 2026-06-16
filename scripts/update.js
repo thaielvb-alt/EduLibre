@@ -1,88 +1,123 @@
 const fs = require("fs");
 
-function decode(file){
-  if(!file) return null;
-  const base64 = file.split(",")[1];
-  return Buffer.from(base64, "base64");
-}
 
-function saveFile(path, data){
-  if(!data) return;
-  fs.writeFileSync(path, data);
-}
+const tipo =
+process.env.INPUT_TIPO;
 
-/* =========================
-   INPUTS
-========================= */
 
-const tipo = process.env.INPUT_TIPO;
-const id = process.env.INPUT_ID;
-const titulo = process.env.INPUT_TITULO;
-const autor = process.env.INPUT_AUTOR;
-const categoria = process.env.INPUT_CATEGORIA;
-const descripcion = process.env.INPUT_DESCRIPCION;
+const id =
+process.env.INPUT_ID;
 
-const archivo = decode(process.env.INPUT_ARCHIVO);
-const video = decode(process.env.INPUT_VIDEO);
-const audio = decode(process.env.INPUT_AUDIO);
-const imagen = decode(process.env.INPUT_IMAGEN);
 
-/* =========================
-   RUTAS
-========================= */
+const titulo =
+process.env.INPUT_TITULO;
 
-const dirMap = {
-  libros: "libros",
-  videos: "videos",
-  audios: "audios",
-  guias: "guias"
-};
 
-const carpeta = dirMap[tipo] || "libros";
+const autor =
+process.env.INPUT_AUTOR;
 
-/* =========================
-   GUARDAR ARCHIVOS
-========================= */
 
-if(imagen)
-  saveFile(`${carpeta}/${id}.jpg`, imagen);
+const categoria =
+process.env.INPUT_CATEGORIA;
 
-if(archivo)
-  saveFile(`${carpeta}/${id}.pdf`, archivo);
 
-if(video)
-  saveFile(`${carpeta}/${id}.mp4`, video);
+const descripcion =
+process.env.INPUT_DESCRIPCION;
 
-if(audio)
-  saveFile(`${carpeta}/${id}.mp3`, audio);
 
-/* =========================
-   ACTUALIZAR JSON
-========================= */
 
-const jsonPath = `datos/${carpeta}.json`;
+const carpeta = tipo;
 
-let data = [];
+
+
+const jsonPath =
+`datos/${carpeta}.json`;
+
+
+
+let data=[];
+
 
 if(fs.existsSync(jsonPath)){
-  data = JSON.parse(fs.readFileSync(jsonPath));
+
+data =
+JSON.parse(
+fs.readFileSync(jsonPath,"utf8")
+);
+
 }
 
+
+
 const nuevo = {
-  id,
-  fecha: new Date().toISOString().split("T")[0],
-  tipo: tipo.slice(0,-1),
-  titulo,
-  autor,
-  categoria,
-  descripcion,
-  imagen: `${carpeta}/${id}.jpg`,
-  pdf: `${carpeta}/${id}.pdf`,
-  video: `${carpeta}/${id}.mp4`,
-  audio: `${carpeta}/${id}.mp3`,
-  recomendado: false
+
+
+id:id,
+
+
+fecha:
+new Date()
+.toISOString()
+.split("T")[0],
+
+
+tipo:
+tipo.slice(0,-1),
+
+
+titulo,
+
+
+autor,
+
+
+categoria,
+
+
+descripcion,
+
+
+imagen:
+"",
+
+
+pdf:
+"",
+
+
+audio:
+"",
+
+
+video:
+"",
+
+
+recomendado:false
+
+
 };
+
+
 
 data.push(nuevo);
 
-fs.writeFileSync(jsonPath, JSON.stringify(data, null, 2));
+
+
+fs.writeFileSync(
+
+jsonPath,
+
+JSON.stringify(
+data,
+null,
+2
+)
+
+);
+
+
+
+console.log(
+"Artículo agregado correctamente"
+);
