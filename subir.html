@@ -42,14 +42,6 @@
 </div>
 
 <script>
-function toBase64(file){
-  return new Promise((resolve)=>{
-    const reader = new FileReader();
-    reader.onload = () => resolve(reader.result);
-    reader.readAsDataURL(file);
-  });
-}
-
 async function subir(){
 
   const titulo = document.getElementById("titulo").value;
@@ -60,46 +52,29 @@ async function subir(){
 
   const id = titulo.toLowerCase().replace(/\s+/g,"_");
 
-  const archivo = document.getElementById("archivo").files[0];
-  const video = document.getElementById("video").files[0];
-  const audio = document.getElementById("audio").files[0];
-  const imagen = document.getElementById("imagen").files[0];
+  const body = `
+UPLOAD
+tipo: ${tipo}
+id: ${id}
+titulo: ${titulo}
+autor: ${autor}
+categoria: ${categoria}
+descripcion: ${descripcion}
+`;
 
-  const res = await fetch(
-    "https://api.github.com/repos/thaielvb-alt/EduLibre/actions/workflows/upload.yml/dispatches",
-    {
-      method: "POST",
-      headers: {
-        "Authorization": "Bearer Tu fine toke ",
-        "Accept": "application/vnd.github+json",
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        ref: "main",
-        inputs: {
-          tipo,
-          id,
-          titulo,
-          autor,
-          categoria,
-          descripcion,
-          archivo: archivo ? await toBase64(archivo) : "",
-          video: video ? await toBase64(video) : "",
-          audio: audio ? await toBase64(audio) : "",
-          imagen: imagen ? await toBase64(imagen) : ""
-        }
-      })
-    }
-  );
+  await fetch("https://api.github.com/repos/thaielvb-alt/EduLibre/issues", {
+    method: "POST",
+    headers: {
+      "Accept": "application/vnd.github+json",
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      title: "UPLOAD:" + titulo,
+      body: body
+    })
+  });
 
-  const data = await res.text();
-  console.log("Respuesta GitHub:", data);
-
-  if(res.ok){
-    alert("Subida enviada a GitHub Actions ✔");
-  } else {
-    alert("Error al subir ❌ revisa consola");
-  }
+  alert("Subida enviada ✔");
 }
 </script>
 
