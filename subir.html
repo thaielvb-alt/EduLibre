@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Subir</title>
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="../style.css">
 </head>
 
 <body>
@@ -43,10 +43,10 @@
 
 <script>
 function toBase64(file){
-  return new Promise(res=>{
-    const r = new FileReader();
-    r.onload = () => res(r.result);
-    r.readAsDataURL(file);
+  return new Promise((resolve)=>{
+    const reader = new FileReader();
+    reader.onload = () => resolve(reader.result);
+    reader.readAsDataURL(file);
   });
 }
 
@@ -65,30 +65,41 @@ async function subir(){
   const audio = document.getElementById("audio").files[0];
   const imagen = document.getElementById("imagen").files[0];
 
-  await fetch("https://api.github.com/repos/thaielvb-alt/EduLibre/actions/workflows/upload.yml/dispatches", {
-    method:"POST",
-    headers:{
-      "Accept":"application/vnd.github+json",
-      "Content-Type":"application/json"
-    },
-    body: JSON.stringify({
-      ref:"main",
-      inputs:{
-        tipo,
-        id,
-        titulo,
-        autor,
-        categoria,
-        descripcion,
-        archivo: archivo ? await toBase64(archivo) : "",
-        video: video ? await toBase64(video) : "",
-        audio: audio ? await toBase64(audio) : "",
-        imagen: imagen ? await toBase64(imagen) : ""
-      }
-    })
-  });
+  const res = await fetch(
+    "https://api.github.com/repos/thaielvb-alt/EduLibre/actions/workflows/upload.yml/dispatches",
+    {
+      method: "POST",
+      headers: {
+        "Authorization": "Bearer Tu fine toke ",
+        "Accept": "application/vnd.github+json",
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        ref: "main",
+        inputs: {
+          tipo,
+          id,
+          titulo,
+          autor,
+          categoria,
+          descripcion,
+          archivo: archivo ? await toBase64(archivo) : "",
+          video: video ? await toBase64(video) : "",
+          audio: audio ? await toBase64(audio) : "",
+          imagen: imagen ? await toBase64(imagen) : ""
+        }
+      })
+    }
+  );
 
-  alert("Subida enviada, espera Actions");
+  const data = await res.text();
+  console.log("Respuesta GitHub:", data);
+
+  if(res.ok){
+    alert("Subida enviada a GitHub Actions ✔");
+  } else {
+    alert("Error al subir ❌ revisa consola");
+  }
 }
 </script>
 
